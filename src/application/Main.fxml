@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <VBox minHeight="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <SplitPane dividerPositions="0.24123539232053423" prefHeight="1000.0">
+                    <items>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <TabPane prefHeight="1000.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Outputs">
+                                       <content>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <ToolBar prefHeight="40.0" prefWidth="200.0">
+                                                  <items>
+                                                    <Button fx:id="outputsAddBtn" mnemonicParsing="false" onAction="#outputsAddBtnClick" text="Add" />
+                                                      <Button fx:id="outputsEdit" mnemonicParsing="false" onAction="#outputsEditBtnClick" text="Edit" />
+                                                      <Button fx:id="outputsRemove" mnemonicParsing="false" onAction="#outputsRemoveBtnClick" text="Remove" />
+                                                  </items>
+                                                </ToolBar>
+                                                <TreeView fx:id="outputsTreeView" prefHeight="1000.0" prefWidth="200.0" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                  </Tab>
+                                  <Tab text="Sensors">
+                                       <content>
+                                          <VBox prefHeight="1000.0" prefWidth="100.0">
+                                             <children>
+                                                <ToolBar prefHeight="40.0" prefWidth="200.0">
+                                                  <items>
+                                                    <Button fx:id="sensorsAddBtn" mnemonicParsing="false" onAction="#sensorsAddBtnClick" text="Add" />
+                                                      <Button fx:id="sensorsEditBtn" mnemonicParsing="false" onAction="#sensorsEditBtnClick" text="Edit" />
+                                                      <Button fx:id="sensorRemoveBtn" mnemonicParsing="false" onAction="#sensorRemoveBtnClick" text="Remove" />
+                                                  </items>
+                                                </ToolBar>
+                                                <TreeView fx:id="SensorsTreeView" prefHeight="1000.0" prefWidth="200.0" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                  </Tab>
+                                    <Tab text="Targets">
+                                       <content>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <ToolBar prefHeight="40.0" prefWidth="200.0">
+                                                  <items>
+                                                    <Button fx:id="targetAddBtn" mnemonicParsing="false" onAction="#targetAddBtnClick" text="Add" />
+                                                      <Button fx:id="targetEditBtn" mnemonicParsing="false" onAction="#targetEditBtnClick" text="Edit" />
+                                                      <Button fx:id="targetRemoveBtn" mnemonicParsing="false" onAction="#targetRemoveBtnClick" text="Remove" />
+                                                  </items>
+                                                </ToolBar>
+                                                <TreeView fx:id="targetTreeView" prefHeight="1000.0" prefWidth="200.0" />
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </Tab>
+                                </tabs>
+                              </TabPane>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="centerVbox" prefHeight="1000.0">
+                           <children>
+                              <ToolBar prefHeight="25.0" prefWidth="200.0">
+                                <items>
+                                    <Label text="Map" />
+                                    <MenuButton mnemonicParsing="false" text="Filter">
+                                       <items>
+                                          <CheckMenuItem fx:id="mapFileterWorldMapChk" mnemonicParsing="false" selected="true" text="World Map" />
+                                          <CheckMenuItem fx:id="mapFileterTargetsChk" mnemonicParsing="false" selected="true" text="Targets" />
+                                          <CheckMenuItem fx:id="mapFileterMeasurementsChk" mnemonicParsing="false" selected="true" text="Measurment Lines" />
+                                       </items>
+                                    </MenuButton>
+                                </items>
+                              </ToolBar>
+                           </children>
+                        </VBox>
+                    </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <SplitPane dividerPositions="0.5" prefHeight="299.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <items>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ToolBar prefHeight="25.0" prefWidth="200.0">
+                          <items>
+                              <Label text="Log" />
+                          </items>
+                        </ToolBar>
+                        <ListView fx:id="logList" prefHeight="267.0" prefWidth="596.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ToolBar prefHeight="25.0" prefWidth="200.0">
+                          <items>
+                              <Label text="Controlls" />
+                          </items>
+                        </ToolBar>
+                        <AnchorPane prefHeight="262.0" prefWidth="596.0">
+                           <children>
+                              <Slider fx:id="ctrlAltSlide" layoutX="14.0" layoutY="39.0" />
+                              <Slider fx:id="ctrlSpeedSlide" blockIncrement="2.0" layoutX="14.0" layoutY="85.0" />
+                              <Label layoutX="64.0" layoutY="22.0" text="Altitude" />
+                              <Label layoutX="63.0" layoutY="68.0" text="Speed" />
+                              <Label layoutX="65.0" layoutY="112.0" text="Rudder" />
+                              <Slider fx:id="ctrlRudderSlide" blockIncrement="2.0" layoutX="14.0" layoutY="129.0" min="-100.0" />
+                              <TextField fx:id="ctrlAltTxt" layoutX="154.0" layoutY="34.0" prefHeight="25.0" prefWidth="90.0" />
+                              <TextField fx:id="ctrlSpeedTxt" layoutX="154.0" layoutY="80.0" prefHeight="25.0" prefWidth="90.0" />
+                              <TextField fx:id="ctrlRudderTxt" layoutX="154.0" layoutY="124.0" onAction="#setRudder" prefHeight="25.0" prefWidth="90.0" />
+                              <Button fx:id="ctrlSetPositionBtn" layoutX="12.0" layoutY="191.0" mnemonicParsing="false" onAction="#ctrlSetPositionBtnClick" text="New Position" />
+                              <TextField fx:id="ctrlLatTxt" layoutX="12.0" layoutY="166.0" />
+                              <TextField fx:id="ctrlLongTxt" layoutX="168.0" layoutY="166.0" />
+                              <Text layoutX="12.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Latitude" />
+                              <Text layoutX="168.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Longitude" />
+                              <Text layoutX="328.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heading" />
+                              <TextField fx:id="ctrlHdtTxt" layoutX="328.0" layoutY="166.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
+         </bottom></BorderPane>
+   </center>
+   <top>
+      <VBox prefHeight="55.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar prefHeight="35.0" prefWidth="200.0">
+               <items>
+                  <MenuButton mnemonicParsing="false" text="Add">
+                    <items>
+                        <MenuItem fx:id="menuOutputsAddBtn" mnemonicParsing="false" onAction="#outputsAddBtnClick" text="Output" />
+                      <MenuItem fx:id="menuSensorsAddBtn" mnemonicParsing="false" onAction="#sensorsAddBtnClick" text="Sensor" />
+                        <MenuItem fx:id="menuTargetAddBtn" mnemonicParsing="false" onAction="#targetAddBtnClick" text="Target" />
+                    </items>
+                  </MenuButton>
+                  <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
+                  <Button fx:id="menuStartSimulationBtn" mnemonicParsing="false" onAction="#menuStartSimulationBtnClick" text="Run" />
+                  <Button fx:id="menuStopSimulationBtn" mnemonicParsing="false" onAction="#menuStopSimulationBtnClick" text="Stop" />
+                  <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
+               </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>
