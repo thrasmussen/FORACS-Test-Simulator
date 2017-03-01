@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.sf.marineapi.nmea.util.Position;
 
 
 public class Scenario {
@@ -29,13 +30,18 @@ public class Scenario {
 
 	public Scenario(){
 		SUT = new Ship("HMS Neversail", "Frigate", "F123", 123, 23);
+		SUT.setPosition(new Position(0, 0, 0));
 	}
 	
 	public void startScenario(){
-		
+		System.out.println("Starting Ship");
+		getSUT().setShipLastUpdated();
+		SUT.setRunning(true);
+		new Thread(SUT).start();
 	}
 	public void stopScenario(){
-		
+		System.out.println("Stopping Ship");
+		SUT.setRunning(false);
 	}
 }
 

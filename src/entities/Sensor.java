@@ -117,6 +117,7 @@ public class Sensor {
 		s += "xParallax: " + xParallax + "\n";
 		s += "yParallax: " + yParallax + "\n";
 		s += "zParallax: " + zParallax + "\n";
+		s += "output:" + output + "\n";
 		return s;
 	}
 

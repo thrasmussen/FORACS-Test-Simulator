@@ -63,7 +63,7 @@
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin></Label>
-                              <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <ComboBox fx:id="outputCmbBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Output" GridPane.rowIndex="6" />
                               <TextField fx:id="parallaxZTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sensor ID" GridPane.rowIndex="1" />

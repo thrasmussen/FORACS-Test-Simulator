@@ -74,9 +74,7 @@ public class MainController  {
 
     	
 
-//    	ObservableList<Sensor> sensorList = FXCollections.observableList(scenario.getSUT().getSensors());
-//    	ObservableList<Target> targetList = FXCollections.observableList(scenario.getStaticTargets());
-//    	ObservableList<Interface> interfaceList = FXCollections.observableList(scenario.getSUT().getInterfaces());
+
     	
     	scenario.getSUT().getSensors().addListener(new ListChangeListener<Sensor>() {
     	      @Override
@@ -220,6 +218,7 @@ public class MainController  {
             SensorController controller = 
             		loader.<SensorController>getController();
             	  	controller.setSensor(sensor);
+            	  	controller.setScenario(scenario);
             	  	
             	  	
 
@@ -252,7 +251,7 @@ public class MainController  {
                 SensorController controller = 
                 		loader.<SensorController>getController();
                 	  	controller.setSensor(selectedItem.getValue());
-                	  	
+                	  	controller.setScenario(scenario);
                 	  	
 
                 stage.showAndWait();
@@ -345,12 +344,12 @@ public class MainController  {
 
     @FXML
     void menuStartSimulationBtnClick(ActionEvent event) {
-
-    }
+    	scenario.startScenario();
+    }	
 
     @FXML
     void menuStopSimulationBtnClick(ActionEvent event) {
-
+    	scenario.stopScenario();
     }
 
 

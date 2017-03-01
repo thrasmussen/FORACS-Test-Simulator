@@ -6,10 +6,13 @@ import java.net.InetAddress;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import com.fazecast.jSerialComm.SerialPort;
 
 import calculations.GeoCalculations;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.GGASentence;
@@ -31,7 +34,7 @@ public class Interface extends Task<Integer> {
 	private String name;
 	private String type;
 	private int dataRate;
-	private Sensor[] sensors;
+	private ObservableList<Sensor> sensors = FXCollections.observableList(new ArrayList<Sensor>());
 	private SerialPort serialPort;
 	private DatagramSocket datagramSocket;
 	private boolean isNetwork;
@@ -70,10 +73,10 @@ public class Interface extends Task<Integer> {
 	public void setDataRate(int dataRate) {
 		this.dataRate = dataRate;
 	}
-	public Sensor[] getSensors() {
+	public ObservableList<Sensor> getSensors() {
 		return sensors;
 	}
-	public void setSensors(Sensor[] sensors) {
+	public void setSensors(ObservableList<Sensor> sensors) {
 		this.sensors = sensors;
 	}
 	public SerialPort getSerialPort() {

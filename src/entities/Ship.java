@@ -25,7 +25,7 @@ public class Ship extends Task<Integer> {
 	private ObservableList<Sensor> sensors = FXCollections.observableList(new ArrayList<Sensor>());
 	private ObservableList<Interface> interfaces = FXCollections.observableList(new ArrayList<Interface>());
 	private Position position;
-	private boolean isRunning;
+	private boolean isRunning = true;
 	private double shipLastUpdate = 0;
 	
 	public Ship() {
@@ -188,13 +188,21 @@ public class Ship extends Task<Integer> {
 	@Override
 	protected Integer call() throws Exception {
 		// TODO Auto-generated method stub
-		
+		System.out.println("SUT thread started");
 		while(isRunning){
 			double time = System.nanoTime();
 		    double delta_time =  ((time - shipLastUpdate) / 1000000000);
 		    shipLastUpdate = time;
 		    updateHeading();
 		    updatePosition(delta_time);
+		    System.out.println("SUT update");
+		    try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
 		}
 
 		return null;
@@ -227,6 +235,9 @@ public class Ship extends Task<Integer> {
 	public Position updatePosition(double deltaTime){
 		position = calculations.GeoCalculations.geoPosFromDistance(position, deltaTime, headingRad.get());
 		return position;
+	}
+	public void setShipLastUpdated(){
+		shipLastUpdate = System.nanoTime();
 	}
 
 

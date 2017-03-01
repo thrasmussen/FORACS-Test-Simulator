@@ -1,6 +1,10 @@
 package application;
 
+import entities.Interface;
 import entities.Sensor;
+import entities.Target;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +15,7 @@ import javafx.stage.Stage;
 
 public class SensorController {
 	private Sensor sensor;
+	private Scenario scenario;
 
     @FXML private TextField typeTxt;
     @FXML private TextField parallaxZTxt;
@@ -19,9 +24,10 @@ public class SensorController {
     @FXML private Slider missmarkSlider;
     @FXML private Slider noiceSlider;
     @FXML private TextField nameTxt;
-    @FXML private ComboBox<?> targetCbx;
+    @FXML private ComboBox<Target> targetCbx;
     @FXML private Button sensorCloseBtn;
     @FXML private TextField sensorIDTxt;
+    @FXML private ComboBox<Interface> outputCmbBox;
 
     public void initialize()  {
     		System.out.println(this.getSensor());
@@ -74,7 +80,15 @@ public class SensorController {
     	sensor.setxParallax(Double.parseDouble(parallaxXTxt.getText()));
     	sensor.setyParallax(Double.parseDouble(parallaxYTxt.getText()));
     	sensor.setzParallax(Double.parseDouble(parallaxZTxt.getText()));
+    	sensor.setTarget(targetCbx.getValue());
     	
+    	Interface output = outputCmbBox.getValue();
+    	if (output != sensor.getOutput() && sensor.getOutput()!=null)sensor.getOutput().getSensors().remove(sensor);
+    	if (output!= null){
+    		if(!output.getSensors().contains(sensor))output.getSensors().add(sensor);
+    		
+    		sensor.setOutput(output);
+    	}
     	
     	sensor.printStatus();
     	
@@ -97,12 +111,18 @@ public class SensorController {
 		parallaxXTxt.setText(""+sensor.getxParallax());
 		parallaxYTxt.setText(""+sensor.getyParallax());
 		parallaxZTxt.setText(""+sensor.getzParallax());
+		outputCmbBox.setValue(sensor.getOutput());
+		targetCbx.setValue(sensor.getTarget());
 		
 	}
-
-
-	public void setName(String str){
-		nameTxt.setText(str);
+	public void setScenario(Scenario scenario){
+		this.scenario = scenario;
+		
+		targetCbx.setItems(scenario.getStaticTargets());
+		outputCmbBox.setItems(scenario.getSUT().getInterfaces());
 	}
+
+
+
 
 }
